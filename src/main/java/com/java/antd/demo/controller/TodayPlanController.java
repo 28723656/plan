@@ -1,5 +1,7 @@
 package com.java.antd.demo.controller;
 
+import com.java.antd.demo.entity.Result;
+import com.java.antd.demo.entity.StatusCode;
 import com.java.antd.demo.entity.TodayPlanEntity;
 import com.java.antd.demo.service.TodayPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +20,17 @@ public class TodayPlanController {
     @Autowired
     private TodayPlanService todayPlanService;
 
-    @RequestMapping("/today/{rank}")
-    public List<TodayPlanEntity> getTodayPalnList(@PathVariable(value = "rank") Integer rank){
-        return todayPlanService.findAllByRank(1);
-    }
-
-    @RequestMapping(value = "/today/save",method = RequestMethod.POST)
-    public TodayPlanEntity save( TodayPlanEntity TodayPlanEntity ){
-        return todayPlanService.save(TodayPlanEntity);
+    @GetMapping("/today/{rank}")
+    public Result getTodayPalnList(@PathVariable(value = "rank") Integer rank){
+        return new Result(true, StatusCode.OK,"成功",todayPlanService.findAllByRank(rank));
 
     }
+
+    @PutMapping( "/today/save")
+    public Result save( TodayPlanEntity todayPlanEntity ){
+        return new Result(true,StatusCode.OK,"成功",todayPlanService.save(todayPlanEntity));
+    }
+
+
+
 }

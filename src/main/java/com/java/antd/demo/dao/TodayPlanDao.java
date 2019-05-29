@@ -2,6 +2,7 @@ package com.java.antd.demo.dao;
 
 
 import com.java.antd.demo.entity.TodayPlanEntity;
+import org.hibernate.annotations.SQLUpdate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

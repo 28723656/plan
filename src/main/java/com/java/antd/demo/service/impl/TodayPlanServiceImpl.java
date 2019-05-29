@@ -27,9 +27,46 @@ public class TodayPlanServiceImpl implements TodayPlanService {
 
     @Override
     public TodayPlanEntity save(TodayPlanEntity todayPlanEntity){
-        todayPlanEntity.setStartTime(new Date());
-        TodayPlanEntity newEntity = todayPlanDao.save(todayPlanEntity);
-        return newEntity;
+
+        TodayPlanEntity result = new TodayPlanEntity();
+
+        //如果id为空，保存
+        if(todayPlanEntity.getId() == null){
+            result = todayPlanDao.save(todayPlanEntity);
+        }else{
+            // 非空，修改
+            TodayPlanEntity  tempResult = todayPlanDao.findOne(todayPlanEntity.getId());
+            if(todayPlanEntity.getEndTime()!=null){
+                tempResult.setEndTime(todayPlanEntity.getEndTime());
+            }
+            if(todayPlanEntity.getFinished()!=null){
+                tempResult.setFinished(todayPlanEntity.getFinished());
+            }
+            if(todayPlanEntity.getName()!=null){
+                tempResult.setName(todayPlanEntity.getName());
+            }
+            if(todayPlanEntity.getRank()!=null){
+                tempResult.setRank(todayPlanEntity.getRank());
+            }
+            if(todayPlanEntity.getScore()!=null){
+                tempResult.setScore(todayPlanEntity.getScore());
+            }
+            if(todayPlanEntity.getStartTime()!=null){
+                tempResult.setStartTime(todayPlanEntity.getStartTime());
+            }
+            if(todayPlanEntity.getTimeInterval()!=null){
+                tempResult.setTimeInterval(todayPlanEntity.getTimeInterval());
+            }
+
+            result = todayPlanDao.save(tempResult);
+        }
+        return result;
     }
+
+    @Override
+    public TodayPlanEntity findById(Integer id) {
+        return todayPlanDao.findOne(id);
+    }
+
 
 }

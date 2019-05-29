@@ -19,6 +19,7 @@ public class TodayPlanEntity {
 
     private Integer rank;
 
+    @Column(length = 100)
     private String name;
 
     private Date startTime;
@@ -28,6 +29,10 @@ public class TodayPlanEntity {
     private Integer finished;
 
     private Integer score;
+
+
+    @Column(length = 100)
+    private String timeInterval;
 
     public Integer getId() {
         return id;
@@ -83,5 +88,13 @@ public class TodayPlanEntity {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public String getTimeInterval() {
+        return timeInterval;
+    }
+
+    public void setTimeInterval(String timeInterval) {
+        this.timeInterval = timeInterval;
     }
 }

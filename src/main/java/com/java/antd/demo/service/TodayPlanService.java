@@ -15,4 +15,6 @@ public interface TodayPlanService {
     List<TodayPlanEntity> findAllByRank(Integer rank);
 
     TodayPlanEntity save(TodayPlanEntity todayPlanEntity);
+
+    TodayPlanEntity findById(Integer id);
 }
